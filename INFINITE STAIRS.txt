@@ -1,0 +1,21 @@
+INFINITE STAIRS
+
+PSEUDO CODE
+- create a cube object at a mouse location
+- get the distance between two cube objects in terms of x,y,z offsets
+- loop over that distance to create new cubes == steps
+- be able to walk and explore
+    ? how to add corner landings? 
+        - check for x, y positions - if not the same, find the where x1, y2 is.
+        - somes sort of rotation?
+    ? do you do this perfectly symmetrically? two landings at a time?
+
+base case:
+- draw two landings in same x/y plane. only z is different.
+- get the distance between the two object
+- loop over distance to build steps
+
+next:
+- print and inspect the positions
+- move the landings to be out of plane
+- last - accept any location.
