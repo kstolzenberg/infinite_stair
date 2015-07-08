@@ -1,5 +1,7 @@
 INFINITE STAIRS
 
+beware of .js tutorials
+
 PSEUDO CODE
 - create a cube object at a mouse location
 - get the distance between two cube objects in terms of x,y,z offsets
@@ -19,3 +21,8 @@ next:
 - print and inspect the positions
 - move the landings to be out of plane
 - last - accept any location.
+
+TODAY
+-try new GO on mouse click at mouse click
+-Try to google a stair. 
+-Otherwise take off offsets and tread width = ydelta / zdelta, try new parent thing

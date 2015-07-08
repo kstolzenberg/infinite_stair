@@ -21,7 +21,7 @@ public class stair1 : MonoBehaviour {
 		landing2.transform.localScale = new Vector3(5,1,5);
 	
 		// you might have to split this up? in to vertical, x-horizontal, z-horizontal variables
-		float distance3 = Vector3.Distance (landing1.transform.position, landing2.transform.position); // this isn't quite what we want - this a vector of the stair run
+		//float distance3 = Vector3.Distance (landing1.transform.position, landing2.transform.position); // this isn't quite what we want - this a vector of the stair run
 		Debug.Log("this is the zposition: " + landing1.transform.position.z);
 
 		Vector3 distance2 = (landing1.transform.position - landing2.transform.position); // this give us the position difference as x,y,z value!
@@ -29,18 +29,18 @@ public class stair1 : MonoBehaviour {
 
 		// do you need to do this on the different or just the points directly?
 		Vector3 start = landing2.transform.position;
-		float offset = (landing2.transform.localScale.z/2); //this is a hack to make up for the centroid of the gameobject
+		//float offset = (landing2.transform.localScale.z/2); //this is a hack to make up for the centroid of the gameobject
 
 		// build the steps
 		// note if you have the steps at even 1 increments and you iterate up at 1 increments - you might not hit your upper landing!
 		// also your offset might be confusing things??? maybe you need to scale by slope?
 		for (float i = start.y; i<=distance2.y; i+=1){
-			GameObject step = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			step.transform.position = new Vector3(start.x, i, start.z+offset+i);
-			//height of step is related to z-offset? slope?
+			//height of step is related to z-offset? slope? this is still having wacky offset issues
 			float k = (distance2.z / distance2.y);
+			GameObject step = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			step.transform.position = new Vector3(start.x, i, start.z+i);
 			Debug.Log (k);
-			step.transform.localScale = new Vector3(5,1,1);
+			step.transform.localScale = new Vector3(5,1,k);
 		}
 	
 	}
