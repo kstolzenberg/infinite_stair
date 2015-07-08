@@ -15,7 +15,7 @@ public class onClick : MonoBehaviour {
 	
 	}
 
-	private Vector3 currentPosition;
+	private Vector3 newPos;
 
 	// Update is called once per frame
 	// this method works to create new game objects!
@@ -33,9 +33,10 @@ public class onClick : MonoBehaviour {
 			// this runs but you can't find the ball? there doesn't seem to be a z-position? 
 			//they are getting placed vertically and only varying by x/y. the scale is crazy too - how to control?
 			Debug.Log("current mouse:"+Input.mousePosition); 
-			Vector3 currentPosition = Input.mousePosition;
+			Vector3 newPos = Input.mousePosition;
+			Vector3 newPosCam = Camera.main.ScreenToWorldPoint(Input.mousePosition); //this doesn't work any better!
 			GameObject ball = GameObject.CreatePrimitive (PrimitiveType.Cube);
-			ball.transform.position = currentPosition;
+			ball.transform.position = new Vector3(newPos.x, newPos.y, newPos.z);//still no z?
 			ball.transform.localScale = new Vector3(30f,30f,30f);
 
 		}
