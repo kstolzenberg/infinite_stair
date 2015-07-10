@@ -40,7 +40,7 @@ public class stair1 : MonoBehaviour {
 			GameObject step = GameObject.CreatePrimitive(PrimitiveType.Cube);
 			step.transform.position = new Vector3(start.x, i, start.z+i);
 			Debug.Log (k);
-			step.transform.localScale = new Vector3(5,1,k);
+			step.transform.localScale = new Vector3(5,1,1);
 		}
 	
 	}

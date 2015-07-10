@@ -1,6 +1,6 @@
 INFINITE STAIRS
 
-beware of .js tutorials
+beware of .js tutorials. don't get frustrated.
 
 PSEUDO CODE
 - create a cube object at a mouse location

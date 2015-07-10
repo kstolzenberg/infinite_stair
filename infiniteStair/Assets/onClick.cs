@@ -34,7 +34,7 @@ public class onClick : MonoBehaviour {
 			//they are getting placed vertically and only varying by x/y. the scale is crazy too - how to control?
 			Debug.Log("current mouse:"+Input.mousePosition); 
 			Vector3 newPos = Input.mousePosition;
-			Vector3 newPosCam = Camera.main.ScreenToWorldPoint(Input.mousePosition); //this doesn't work any better!
+			//Vector3 newPosCam = Camera.main.ScreenToWorldPoint(Input.mousePosition); //this doesn't work any better!
 			GameObject ball = GameObject.CreatePrimitive (PrimitiveType.Cube);
 			ball.transform.position = new Vector3(newPos.x, newPos.y, newPos.z);//still no z?
 			ball.transform.localScale = new Vector3(30f,30f,30f);
