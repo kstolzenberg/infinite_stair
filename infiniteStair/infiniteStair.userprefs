@@ -1,11 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/stair2.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/onClick.cs">
     <Files>
       <File FileName="Assets/stair1.cs" Line="22" Column="2" />
-      <File FileName="Assets/onClick.cs" Line="37" Column="108" />
+      <File FileName="Assets/onClick.cs" Line="18" Column="25" />
       <File FileName="Assets/onClickMove.cs" Line="5" Column="44" />
-      <File FileName="Assets/stair2.cs" Line="9" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
