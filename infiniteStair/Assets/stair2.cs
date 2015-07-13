@@ -5,6 +5,8 @@
 using UnityEngine;
 using System.Collections;
 
+
+
 public class stair2 : MonoBehaviour {
 	
 	public GameObject step;
@@ -14,14 +16,15 @@ public class stair2 : MonoBehaviour {
 	public int tread; // make height and location a random? add if else to deal with 90 angles and Quaternion.Eulers?
 	private float offset; // correct for centroid positioning
 
-	private Transform lastChild;
-	private Vector3 lastStep;
+	private Transform lastStep;
+	private Vector3 lastStepPosition;
 	private int lastIndex;
 	private Vector3 newStart;
 	
 	// Use this for initialization
 	void Start () {
 		//these functions are impossible !!! too much fussy syntax :<
+		//make this a struct - capture info and access it 
 //			int height = Random.Range(5, 20);
 //			int width = Random.Range(1, 3);
 //			int tread = Random.Range(1, 3);
@@ -40,10 +43,15 @@ public class stair2 : MonoBehaviour {
 		}
 		// landing at the top
 		lastIndex = (transform.childCount) - 1; // index of the last child
-		lastChild = this.gameObject.transform.GetChild (lastIndex);
-		lastStep = lastChild.transform.position;
-		offset = 3; //offset = (5f / 2f); //should be landing width variable / 2
-		landing = Instantiate (landing, new Vector3 (lastStep.x, lastStep.y, lastStep.z + offset), Quaternion.identity) as GameObject;
+		lastStep = this.gameObject.transform.GetChild (lastIndex);
+		lastStepPosition = lastStep.transform.position;
+		landing = Instantiate (landing) as GameObject;
+		// this will correctly center the landing!!!!
+		landing.transform.position = new Vector3 (lastStepPosition.x, 
+		                                          lastStepPosition.y, 
+		                                          lastStepPosition.z + lastStep.transform.localScale.z / 2 + landing.transform.localScale.z / 2);
+		landing.transform.rotation = Quaternion.identity;
+		//offset = ; //offset = (5f / 2f); //should be landing width variable / 2
 		landing.gameObject.name = "landing";
 		landing.transform.parent = transform;
 		newStart = landing.transform.position; //need to convert this to an int?

@@ -4,16 +4,19 @@
 // seems that only works with the main camera too?
 // how to do this out in space? spherecast?
 
+
+// ROTO FIXED THIS !!!! BUILD OFF THIS
 using UnityEngine;
 using System.Collections;
 
 public class onClickMove : MonoBehaviour {
-	
+
+	public Camera raycastCamera; // always use the same camera
+	public float raycastDistance = 50.0f; // this sets the plan at 50f from the camera! vertically
 	Vector3 newPosition;
 
 	// Use this for initialization
 	void Start () {
-		newPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -21,20 +24,23 @@ public class onClickMove : MonoBehaviour {
 
 		// this will move the original object
 		if (Input.GetMouseButtonDown(0)){
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			// when there is a physical plane
+			//RaycastHit hit; 
+			//Ray ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
 
-			if (Physics.Raycast(ray, out hit)){
-				newPosition = hit.point;
-				transform.position = newPosition;
-				Debug.Log ("this is the new spot:"+newPosition);
-			}
+			Vector3 screenPositionWithDistance = Input.mousePosition;
+			screenPositionWithDistance.z = raycastDistance;
+			Vector3 worldPoint = raycastCamera.ScreenToWorldPoint(screenPositionWithDistance); //makes the ray implictly & converts to world point
+
+			newPosition = worldPoint;
+			transform.position = newPosition;
+			Debug.Log ("this is the new spot:"+newPosition);
 		}
 
 		// this will create new shapes!
 		if (Input.GetMouseButtonDown(1)) {
 			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
 			
 			if (Physics.Raycast(ray, out hit)){
 				newPosition = hit.point;
