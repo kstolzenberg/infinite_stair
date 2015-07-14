@@ -11,6 +11,7 @@ public class stair3 : MonoBehaviour {
 
 	private Vector3 stairStart;
 	private Vector3 stairEnd;
+	private float y1, y2, z1, z2;
 
 	public GameObject landing;
 	public GameObject step;
@@ -49,11 +50,20 @@ public class stair3 : MonoBehaviour {
 				stairStart = allLandings[j].transform.position;
 				stairEnd = allLandings[j+1].transform.position;
 			
-				//you are drawing stairs between the first and last step that correct relative to landing
-				float y1 = stairStart.y + landing.transform.localScale.y/2 + step.transform.localScale.y/2;
-				float z1 = stairStart.z + landing.transform.localScale.z/2 + step.transform.localScale.z/2;
-				float y2 = stairEnd.y - landing.transform.localScale.y/2 - step.transform.localScale.y/2; 
-				float z2 = stairEnd.z - landing.transform.localScale.z/2 - step.transform.localScale.z/2;
+				// you are drawing stairs between the first and last step that are correct relative to landing
+				// check for direction
+				if (stairEnd.y > stairStart.y ){
+					y1 = stairStart.y + landing.transform.localScale.y/2 + step.transform.localScale.y/2;
+					z1 = stairStart.z + landing.transform.localScale.z/2 + step.transform.localScale.z/2;
+					y2 = stairEnd.y - landing.transform.localScale.y/2 - step.transform.localScale.y/2; 
+					z2 = stairEnd.z - landing.transform.localScale.z/2 - step.transform.localScale.z/2;
+				} else {
+					y1 = stairStart.y - landing.transform.localScale.y/2 - step.transform.localScale.y/2;
+					z1 = stairStart.z + landing.transform.localScale.z/2 + step.transform.localScale.z/2;
+					y2 = stairEnd.y + landing.transform.localScale.y/2 + step.transform.localScale.y/2; 
+					z2 = stairEnd.z - landing.transform.localScale.z/2 - step.transform.localScale.z/2;
+				}
+
 				float stepHeight = (y2 - y1) / numSteps;
 				float stepWidth = (z2 - z1) / numSteps;
 
