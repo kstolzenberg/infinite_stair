@@ -75,6 +75,11 @@ public class stair2 : MonoBehaviour {
 				}
 			}
 		}
+
+		//			foreach (GameObject obj in allLandings){ // to loop through all
+		//				Debug.Log(obj.transform.position);
+		//			}
+
 	}
 
 
