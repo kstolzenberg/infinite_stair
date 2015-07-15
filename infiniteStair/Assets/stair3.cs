@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class stair3 : MonoBehaviour {
 	
@@ -24,20 +25,22 @@ public class stair3 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// some things are easier to style and create in the gui!
+		// UI text in gui, destroy here
+		GameObject intro = GameObject.FindWithTag("intro");
+		Destroy (intro, 2f);
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
-	
+
 		if (Input.GetMouseButtonDown(0)){
 //			Vector3 screenPositionWithDistance = Input.mousePosition;
 //			screenPositionWithDistance.z = raycastDistance;
 //			Vector3 worldPoint = raycastCamera.ScreenToWorldPoint(screenPositionWithDistance); 
 		
-			// define and create landings
-			// this method seems slower than ScreenToWorldPoint
+			// define and create landings - this method seems slower than ScreenToWorldPoint
 			//buildPlane = new Plane(Vector3.right, transform.position); // plane along 0-axis
 
 			buildPlane = new Plane(new Vector3(100,0,0), transform.position); // this isn't moving the plane back? how to vary position?
@@ -86,8 +89,20 @@ public class stair3 : MonoBehaviour {
 			
 			}
 
-
 		}
 	
+		// move camera!
+		if (Input.GetKey(KeyCode.W)){
+			raycastCamera.transform.Translate(Vector3.forward);	
+		}
+		if (Input.GetKey(KeyCode.B)){
+			raycastCamera.transform.Translate(Vector3.back);	
+		}
+		if (Input.GetKey(KeyCode.U)){
+			raycastCamera.transform.Translate(Vector3.up);	
+		}
+		if (Input.GetKey(KeyCode.D)){
+			raycastCamera.transform.Translate(Vector3.down);	
+		}
 	}
 }
