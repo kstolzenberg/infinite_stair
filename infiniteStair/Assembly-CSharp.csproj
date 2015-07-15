@@ -51,6 +51,7 @@
      <Compile Include="Assets\stair1.cs" />
      <Compile Include="Assets\stair2.cs" />
      <Compile Include="Assets\stair3.cs" />
+     <Compile Include="Assets\stair4.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
