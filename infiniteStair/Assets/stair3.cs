@@ -104,5 +104,11 @@ public class stair3 : MonoBehaviour {
 		if (Input.GetKey(KeyCode.D)){
 			raycastCamera.transform.Translate(Vector3.down);	
 		}
+		if (Input.GetKey(KeyCode.L)){
+			raycastCamera.transform.Translate(Vector3.left);	
+		}
+		if (Input.GetKey(KeyCode.R)){
+			raycastCamera.transform.Translate(Vector3.right);	
+		}
 	}
 }
