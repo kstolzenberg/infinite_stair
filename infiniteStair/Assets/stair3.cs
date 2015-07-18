@@ -28,7 +28,7 @@ public class stair3 : MonoBehaviour {
 		// some things are easier to style and create in the gui!
 		// UI text in gui, destroy here
 		GameObject intro = GameObject.FindWithTag("intro");
-		Destroy (intro, 2f);
+		Destroy (intro, 4f);
 
 	}
 
@@ -55,10 +55,9 @@ public class stair3 : MonoBehaviour {
 
 			allLandings = GameObject.FindGameObjectsWithTag("landing");
 
-			// build stair from prev to next landing.
-			for (int j = 0; j < allLandings.Length; j++){ 
-				// this is rebuilding all steps always. how to have step loop only between current indexes? is this bc of void update? coroutines?
-				// scales about center rather than reset and messes with origin?
+			// build stair from prev to next landing. 
+			//you don't need to loop thru the whole array - thats why redundant!!!! only the last two to build the stairs!
+			for (int j = allLandings.Length-2; j < allLandings.Length; j++){ 
 				stairStart = allLandings[j].transform.position;
 				stairEnd = allLandings[j+1].transform.position;
 			
@@ -75,12 +74,13 @@ public class stair3 : MonoBehaviour {
 					z2 = stairEnd.z - landing.transform.localScale.z/2 - step.transform.localScale.z/2;
 				}
 
+				//note with scaling need to transform offsets too!
 				float stepHeight = (y2 - y1) / numSteps;
 				float stepWidth = (z2 - z1) / numSteps;
 
 				for (int i = 0; i <= numSteps; i++){
 					step = Instantiate (step, new Vector3 (stairStart.x, y1, z1), Quaternion.identity) as GameObject;
-					//step.transform.localScale = new Vector3(5,stepHeight,stepWidth); 
+					step.transform.localScale = new Vector3(5,stepHeight,stepWidth); 
 					step.gameObject.name = "step"; 
 					step.transform.parent = transform;
 					y1 += stepHeight;
@@ -95,19 +95,19 @@ public class stair3 : MonoBehaviour {
 		if (Input.GetKey(KeyCode.W)){
 			raycastCamera.transform.Translate(Vector3.forward);	
 		}
-		if (Input.GetKey(KeyCode.B)){
+		if (Input.GetKey(KeyCode.S)){
 			raycastCamera.transform.Translate(Vector3.back);	
 		}
-		if (Input.GetKey(KeyCode.U)){
+		if (Input.GetKey(KeyCode.Q)){
 			raycastCamera.transform.Translate(Vector3.up);	
 		}
-		if (Input.GetKey(KeyCode.D)){
+		if (Input.GetKey(KeyCode.E)){
 			raycastCamera.transform.Translate(Vector3.down);	
 		}
-		if (Input.GetKey(KeyCode.L)){
+		if (Input.GetKey(KeyCode.A)){
 			raycastCamera.transform.Translate(Vector3.left);	
 		}
-		if (Input.GetKey(KeyCode.R)){
+		if (Input.GetKey(KeyCode.D)){
 			raycastCamera.transform.Translate(Vector3.right);	
 		}
 	}
