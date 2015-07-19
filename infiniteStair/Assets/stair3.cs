@@ -19,6 +19,7 @@ public class stair3 : MonoBehaviour {
 	public GameObject landing;
 	public GameObject step;
 	float numSteps = 10; // explicit and size changes
+	int incrementor = 5; // steps of randoms between planes
 
 	private GameObject [] allLandings;
 	private GameObject [] allSteps;
@@ -35,8 +36,10 @@ public class stair3 : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetMouseButtonDown(0)){		
-			// define and create landings - this method seems slower than ScreenToWorldPoint
-			buildPlane = new Plane(Vector3.right, new Vector3(-1, 0, 0));
+			// define and create landings
+			// generate new planes?
+			int vectorPosition = Random.Range(0, 20) * incrementor;
+			buildPlane = new Plane(Vector3.right, new Vector3(-vectorPosition, 0, 0));
 			Ray ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
 			if (buildPlane.Raycast(ray, out raycastDistance)){
 				worldPoint = ray.GetPoint(raycastDistance);
