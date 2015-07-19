@@ -18,14 +18,13 @@ public class stair3 : MonoBehaviour {
 
 	public GameObject landing;
 	public GameObject step;
-	float numSteps = 10; //explicit and size changes
+	float numSteps = 10; // explicit and size changes
 
-	private GameObject [] allLandings; //arrray of all gamedObjects added by tag; tag in prefab
+	private GameObject [] allLandings;
 	private GameObject [] allSteps;
 
 	// Use this for initialization
 	void Start () {
-		// some things are easier to style and create in the gui!
 		// UI text in gui, destroy here
 		GameObject intro = GameObject.FindWithTag("intro");
 		Destroy (intro, 4f);
@@ -35,15 +34,9 @@ public class stair3 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetMouseButtonDown(0)){
-//			Vector3 screenPositionWithDistance = Input.mousePosition;
-//			screenPositionWithDistance.z = raycastDistance;
-//			Vector3 worldPoint = raycastCamera.ScreenToWorldPoint(screenPositionWithDistance); 
-		
+		if (Input.GetMouseButtonDown(0)){		
 			// define and create landings - this method seems slower than ScreenToWorldPoint
-			// buildPlane = new Plane(Vector3.right, transform.position); // plane along 0-axis
-		
-			buildPlane = new Plane(Vector3.right, new Vector3(-20, 0, 0));
+			buildPlane = new Plane(Vector3.right, new Vector3(-1, 0, 0));
 			Ray ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
 			if (buildPlane.Raycast(ray, out raycastDistance)){
 				worldPoint = ray.GetPoint(raycastDistance);
@@ -59,9 +52,7 @@ public class stair3 : MonoBehaviour {
 
 			allLandings = GameObject.FindGameObjectsWithTag("landing");
 
-			// build stair from prev to next landing. 
-			// you don't need to loop thru the whole array - thats why redundant!!!! 
-			// only the last two to build the stairs! you don't need a loop at all!
+			// build stair from prev to next landing. no need to loop bc array is already expanding.1
 			if (allLandings.Length >= 2) {	
 				int j = allLandings.Length-2;
 				stairStart = allLandings[j].transform.position;
@@ -78,6 +69,11 @@ public class stair3 : MonoBehaviour {
 					z1 = stairStart.z + landing.transform.localScale.z/2;
 					y2 = stairEnd.y + landing.transform.localScale.y/2; 
 					z2 = stairEnd.z - landing.transform.localScale.z/2;
+				}
+
+				if (stairEnd.z < stairStart.z){
+					z1 = stairStart.z - landing.transform.localScale.z/2;
+					z2 = stairEnd.z + landing.transform.localScale.z/2;
 				}
 
 				float stepHeight = (y2 - y1) / numSteps;
