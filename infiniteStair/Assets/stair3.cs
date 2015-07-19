@@ -41,12 +41,16 @@ public class stair3 : MonoBehaviour {
 //			Vector3 worldPoint = raycastCamera.ScreenToWorldPoint(screenPositionWithDistance); 
 		
 			// define and create landings - this method seems slower than ScreenToWorldPoint
-			//buildPlane = new Plane(Vector3.right, transform.position); // plane along 0-axis
-
-			buildPlane = new Plane(new Vector3(100,0,0), transform.position); // this isn't moving the plane back? how to vary position?
+			// buildPlane = new Plane(Vector3.right, transform.position); // plane along 0-axis
+		
+			buildPlane = new Plane(Vector3.right, new Vector3(-20, 0, 0));
 			Ray ray = raycastCamera.ScreenPointToRay(Input.mousePosition);
 			if (buildPlane.Raycast(ray, out raycastDistance)){
 				worldPoint = ray.GetPoint(raycastDistance);
+				Debug.Log("RAYCAST WORLD POINT: " + worldPoint);
+			}
+			else {
+				Debug.Log("DIDN'T HIT");
 			}
 
 			landing = Instantiate (landing, worldPoint, Quaternion.identity) as GameObject;
@@ -56,30 +60,32 @@ public class stair3 : MonoBehaviour {
 			allLandings = GameObject.FindGameObjectsWithTag("landing");
 
 			// build stair from prev to next landing. 
-			//you don't need to loop thru the whole array - thats why redundant!!!! only the last two to build the stairs!
-			for (int j = allLandings.Length-2; j < allLandings.Length; j++){ 
+			// you don't need to loop thru the whole array - thats why redundant!!!! 
+			// only the last two to build the stairs! you don't need a loop at all!
+			if (allLandings.Length >= 2) {	
+				int j = allLandings.Length-2;
 				stairStart = allLandings[j].transform.position;
 				stairEnd = allLandings[j+1].transform.position;
 			
 				// check for stair direction & correct offset relative to landing
 				if (stairEnd.y > stairStart.y ){
-					y1 = stairStart.y + landing.transform.localScale.y/2 + step.transform.localScale.y/2;
-					z1 = stairStart.z + landing.transform.localScale.z/2 + step.transform.localScale.z/2;
-					y2 = stairEnd.y - landing.transform.localScale.y/2 - step.transform.localScale.y/2; 
-					z2 = stairEnd.z - landing.transform.localScale.z/2 - step.transform.localScale.z/2;
+					y1 = stairStart.y + landing.transform.localScale.y/2;
+					z1 = stairStart.z + landing.transform.localScale.z/2;
+					y2 = stairEnd.y - landing.transform.localScale.y/2;
+					z2 = stairEnd.z - landing.transform.localScale.z/2;
 				} else {
-					y1 = stairStart.y - landing.transform.localScale.y/2 - step.transform.localScale.y/2;
-					z1 = stairStart.z + landing.transform.localScale.z/2 + step.transform.localScale.z/2;
-					y2 = stairEnd.y + landing.transform.localScale.y/2 + step.transform.localScale.y/2; 
-					z2 = stairEnd.z - landing.transform.localScale.z/2 - step.transform.localScale.z/2;
+					y1 = stairStart.y - landing.transform.localScale.y/2;
+					z1 = stairStart.z + landing.transform.localScale.z/2;
+					y2 = stairEnd.y + landing.transform.localScale.y/2; 
+					z2 = stairEnd.z - landing.transform.localScale.z/2;
 				}
 
-				//note with scaling need to transform offsets too!
 				float stepHeight = (y2 - y1) / numSteps;
 				float stepWidth = (z2 - z1) / numSteps;
 
+				//offset z while looping to scale
 				for (int i = 0; i <= numSteps; i++){
-					step = Instantiate (step, new Vector3 (stairStart.x, y1, z1), Quaternion.identity) as GameObject;
+					step = Instantiate (step, new Vector3 (stairStart.x, y1, z1 + stepWidth/2), Quaternion.identity) as GameObject;
 					step.transform.localScale = new Vector3(5,stepHeight,stepWidth); 
 					step.gameObject.name = "step"; 
 					step.transform.parent = transform;
